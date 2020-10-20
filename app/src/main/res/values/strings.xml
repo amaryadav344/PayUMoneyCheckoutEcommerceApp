@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PayUMoney Checkout example</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ruppi_symbol">₹</string>
+    <string name="product_added">Product Added to Cart</string>
+    <string name="product_removed">Product Removed from Cart</string>
+    <string name="MerchantKey">Your MerchantKey</string>
+    <string name="MerchantId">Your MerchantId</string>
+    <string name="sUrl">https://test.payumoney.com/mobileapp/payumoney/success.php</string>
+    <string name="fUrl">https://test.payumoney.com/mobileapp/payumoney/failure.php</string>
+</resources>
