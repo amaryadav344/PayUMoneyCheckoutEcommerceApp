@@ -43,26 +43,7 @@ public class PaymentActivity extends AppCompatActivity implements ProductsFragme
     ImageView imageViewCart;
     List<Product> products;
 
-    public static String hashCal(String str) {
-        byte[] hashseq = str.getBytes();
-        StringBuilder hexString = new StringBuilder();
-        try {
-            MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
-            algorithm.reset();
-            algorithm.update(hashseq);
-            byte messageDigest[] = algorithm.digest();
-            for (byte aMessageDigest : messageDigest) {
-                String hex = Integer.toHexString(0xFF & aMessageDigest);
-                if (hex.length() == 1) {
-                    hexString.append("0");
-                }
-                hexString.append(hex);
-            }
-        } catch (NoSuchAlgorithmException ignored) {
-        }
-        return hexString.toString();
-    }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -217,6 +198,27 @@ public class PaymentActivity extends AppCompatActivity implements ProductsFragme
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+    // Method to create hash
+    public static String hashCal(String str) {
+        byte[] hashseq = str.getBytes();
+        StringBuilder hexString = new StringBuilder();
+        try {
+            MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
+            algorithm.reset();
+            algorithm.update(hashseq);
+            byte messageDigest[] = algorithm.digest();
+            for (byte aMessageDigest : messageDigest) {
+                String hex = Integer.toHexString(0xFF & aMessageDigest);
+                if (hex.length() == 1) {
+                    hexString.append("0");
+                }
+                hexString.append(hex);
+            }
+        } catch (NoSuchAlgorithmException ignored) {
+        }
+        return hexString.toString();
+    }
+
 
     /**
      * Note : Hash value must be calculated from server only for testing purpose you can generate
@@ -242,7 +244,7 @@ public class PaymentActivity extends AppCompatActivity implements ProductsFragme
         stringBuilder.append(params.get(PayUmoneyConstants.UDF4)).append("|");
         stringBuilder.append(params.get(PayUmoneyConstants.UDF5)).append("||||||");
 
-        stringBuilder.append("31Ppr0ZQBh");
+        stringBuilder.append(R.string.MerchantSalt);
 
         String hash = hashCal(stringBuilder.toString());
         paymentParam.setMerchantHash(hash);
